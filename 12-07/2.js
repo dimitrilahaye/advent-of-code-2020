@@ -27,16 +27,16 @@ const processBags = (abag) => {
         return abag.contained;
     }
 }
-const countBagsFrom = (bagName) => processBags(getBagByName(bagName))
-    .reduce((count, bag) => {
-        count += countOneBag(bag);
-        return count;
-    }, 0);
 const countOneBag = (bag) => bag.number + bag.number * bag.contained.reduce((c, abag) => {
     if (abag.contained) {
         return c + countOneBag(abag);
     }
     return c + abag.number;
 }, 0);
+const countBagsFrom = (bagName) => processBags(getBagByName(bagName))
+    .reduce((count, bag) => {
+        count += countOneBag(bag);
+        return count;
+    }, 0);
 
 console.log(countBagsFrom('shiny gold'));
